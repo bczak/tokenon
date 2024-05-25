@@ -4,11 +4,12 @@ import { Button, Input, Section, SegmentedControl, Image, Text } from '@telegram
 import { ETradeFromControl } from './TradeFormComp.types';
 import tonSvg from '/src/assets/icons/ton.svg';
 
-interface TradeFormCompProps {
-    id: number;
-}
+// interface TradeFormCompProps {
+//     id: number;
+// }
 
-export const TradeFormComp: FC<TradeFormCompProps>  = ({id}) => {
+// export const TradeFormComp: FC<TradeFormCompProps>  = ({id}) => {
+export const TradeFormComp: FC  = () => {
     const [inputValue, setInputValue] = useState('');
     
     const [ activeSegmentTradeFormControl, setActiveSegmentTradeFormControl] = useState<ETradeFromControl>(ETradeFromControl.BUY)

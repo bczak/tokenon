@@ -4,14 +4,14 @@ import { Link } from '@/components/Link/Link.tsx';
 import './CoinCardComp.scss';
 
 interface CoinCardCompProps {
-    id: number;
+    // id: number;
     img: string;
     cap: string;
     description: string;
     token: string;
 }
 
-export const CoinCardComp: FC<CoinCardCompProps>  = ({id, img, cap, description, token}) => {
+export const CoinCardComp: FC<CoinCardCompProps>  = ({img, cap, description, token}) => {
     return (
         <Link to={'/coin'}>
         {/* <Link to={`/coin${id}`}> */}

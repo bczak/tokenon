@@ -1,0 +1,18 @@
+.coinInfoContainer {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem;
+    height: auto;
+
+    .coinImage {
+        height: 10rem !important;
+        width: 10rem !important;
+        margin-right: 0.5rem;
+    }
+
+    .infoContainer {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+    }
+}

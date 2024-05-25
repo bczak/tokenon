@@ -34,7 +34,7 @@ export const BoardPage: React.FC = () => {
       </SegmentedControl>
       <Section
         >
-          <CoinCardComp id={1} cap={'$5 460,717'} description={'CTO Old dev rugged but we already have 40 in cto vc ready to send this lets go to raydium'} token={'Kabosu Funeral (ticker: KBF)'} img={'/images/coin.png'}/>
+          <CoinCardComp cap={'$5 460,717'} description={'CTO Old dev rugged but we already have 40 in cto vc ready to send this lets go to raydium'} token={'Kabosu Funeral (ticker: KBF)'} img={'/images/coin.png'}/>
           </Section>
     </List>
   )

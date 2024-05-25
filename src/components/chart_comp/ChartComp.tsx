@@ -1,6 +1,6 @@
 import React from 'react';
 import './ChartComp.scss'
-import { Text, Image, Card } from '@telegram-apps/telegram-ui';
+import { Text, Card } from '@telegram-apps/telegram-ui';
 import chartImage from '../../assets/images/chart.jpeg'
 import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell';
 import { CardChip } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip';
