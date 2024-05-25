@@ -3,6 +3,7 @@
     flex-direction: row;
     margin: 0.5rem;
     height: auto;
+    align-items: center;
 
     .coinImage {
         height: 10rem !important;
@@ -14,5 +15,61 @@
         display: flex;
         flex-direction: column;
         width: 70%;
+    }
+
+    .description {
+        font-size: 0.8rem;
+        // color: var(--tg-theme-text-color);
+        color: lightgray;
+        line-height: 1rem;
+    }
+
+    .marketCap {
+        display: flex;
+        flex-direction: row;
+        gap: 5px;
+        margin: 0.5rem 0;
+    }
+
+    .capValue {
+        color: var(--tg-theme-button-color);
+    }
+
+    .capText {
+        color: grey;
+    }
+}
+
+.progressContainer {
+    margin: 0.5rem;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+
+    .progressText {
+        font-size: 0.9rem;
+    }
+
+    .progressLine {
+        height: 15px;
+        margin: 0.5rem 0;
+    }
+
+    .progressValue {
+        color: grey;
+    }
+}
+
+.list {
+    margin: 0.5rem 0;
+    border-radius: 10px;
+    padding: 0.5rem;
+    .listItem {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin: 0 0.5rem 0.5rem 0;
+        background-color: var(--tg-theme-section-bg-color);
+        color: var(--tg-theme-text-color);
     }
 }
