@@ -1,10 +1,9 @@
 import type { ComponentType, JSX } from 'react';
 
-import { BoardPage } from '@/pages/board/BoardPage.tsx';
+import { BoardPage } from '@/pages/board/BoardPage';
 import { InitDataPage } from '@/pages/InitDataPage/InitDataPage';
-import { LaunchParamsPage } from '@/pages/LaunchParamsPage/LaunchParamsPage.tsx';
-import { ThemeParamsPage } from '@/pages/ThemeParamsPage/ThemeParamsPage.tsx';
-import { TONConnectPage } from '@/pages/TONConnectPage/TONConnectPage';
+import { ThemeParamsPage } from '@/pages/ThemeParamsPage/ThemeParamsPage';
+import { WalletPage } from '@/pages/wallet/WalletPage';
 import { CoinPage } from '@/pages/CoinPage/CoinPage';
 
 interface Route {
@@ -15,15 +14,15 @@ interface Route {
 }
 
 export const routes: Route[] = [
-  { path: '/', Component: BoardPage },
+  { path: '/', Component: BoardPage, title: 'TokenON' },
   { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
   { path: '/coin', Component: CoinPage, title: 'Coin Card' },
   {
-    path: '/ton-connect',
-    Component: TONConnectPage,
-    title: 'TON Connect',
+    path: '/wallet',
+    Component: WalletPage,
+    title: 'Wallet',
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"

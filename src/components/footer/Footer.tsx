@@ -3,8 +3,6 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import { Tabbar } from '@telegram-apps/telegram-ui'
 import { IoAlbumsOutline, IoRocketOutline, IoWalletOutline } from 'react-icons/io5'
 
-import './Footer.scss'
-
 export const Footer: React.FC = () => {
   const location = useLocation()
   const navigate = useNavigate()
@@ -32,8 +30,8 @@ export const Footer: React.FC = () => {
       </Tabbar.Item>
       <Tabbar.Item
         text="Launch"
-        selected={ activeRoute === '/init-data' }
-        onClick={ () => handleFooterNavigate('/init-data') }
+        selected={ activeRoute === '/theme-params' }
+        onClick={ () => handleFooterNavigate('/theme-params') }
       >
         <IoRocketOutline size={ 28 }/>
       </Tabbar.Item>

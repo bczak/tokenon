@@ -1,1 +1,1 @@
-export * from './BannerComp.tsx'
+export * from './BannerComp'
