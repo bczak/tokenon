@@ -13,22 +13,19 @@ interface CoinCardCompProps {
 }
 
 export const CoinCardComp: FC<CoinCardCompProps>  = ({id, img, cap, description, token}) => {
-    const themeParams = useThemeParams();
-
     return (
         <Link to={'/coin'}>
         {/* <Link to={`/coin${id}`}> */}
         <Cell
-        style={{backgroundColor: themeParams.sectionBgColor}} 
         className="coinCard"
       before={<Image src={`${img}`} />}
       description={description}
       subhead={<>
         <Text className='capText'>Market cap: </Text>
-        <Text style={{color: `${themeParams.buttonColor}`}} className='capValue'>{cap}</Text>
+        <Text className='capValue'>{cap}</Text>
       </>}
     >
-       <Subheadline style={{color: `${themeParams.textColor}`}} className='ticker'>{token}</Subheadline>
+       <Subheadline className='ticker'>{token}</Subheadline>
     </Cell>
     </Link>
     )

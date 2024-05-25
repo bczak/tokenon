@@ -1,12 +1,18 @@
 .coinCard {
     border-radius: 10px;
-}
+    background-color: var(--tg-theme-section-bg-color);
 
-.ticker {
-    font-size: 1rem;
-    font-weight: 500;
-}
+    .ticker {
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--tg-theme-text-color);
+    }
 
-.capText, .capValue {
-    font-size: 0.9rem !important;
+    .capText, .capValue {
+        font-size: 0.9rem;
+    }
+
+    .capValue {
+        color: var(--tg-theme-button-color);
+    }
 }
