@@ -1,0 +1,59 @@
+.tradeFormSection {
+    margin-top: 1rem;
+    width: 90%;
+    border-radius: 15px;
+    margin: auto;
+    border: 2px solid var(--tg-theme-section-bg-color) !important;
+
+    .segment {
+        background: var(--tg-theme-section-bg-color);
+    }
+
+    .activeBuy {
+        background-color: lightgreen;
+    }
+    
+    .activeSell {
+        background-color: lightcoral;
+    }
+
+    .tradeFormInput, .tradeFormButton {
+        width: 100%;
+        padding: 0.5rem;
+        border-radius: 10px;
+        margin: auto;
+        font-size: 1.2rem;
+        font-weight: 500;
+    }
+
+    .tradeFormButton {
+        background: var(--tg-theme-button-color);
+        color: var(--tg-theme-button-text-color);
+    }
+
+    .tradeFormInput {
+        background: var(--tg-theme-section-bg-color) !important;
+        color: var(--tg-theme-text-color);
+        width: 95%;
+        padding-left: 0.5rem;
+        padding-right: 0.5rem;
+        margin-bottom: 1rem;
+        margin-top: 1rem;
+    }
+
+    .tonCoinImg {
+        margin-left: 0.5rem;
+        background-color: #007AFF;
+    }
+
+    .coinImg {
+        margin-left: 0.5rem;
+    }
+
+    .inputAfterContainer {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: row;
+      }
+}

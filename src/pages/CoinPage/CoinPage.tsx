@@ -1,17 +1,9 @@
 import type { FC } from 'react';
-import { Button, List } from '@telegram-apps/telegram-ui';
+import { TradeFormComp } from '@/components/trade_form_comp/TradeFormComp';
 
 export const CoinPage: FC = () => {
 
   return (
-    <List>
-      <Button
-        onClick={() => {
-          alert('Hello, Telegram Mini Apps!');
-        }}
-        >
-          Click me
-        </Button>
-    </List>
+    <TradeFormComp id={1}/>
   );
 };
