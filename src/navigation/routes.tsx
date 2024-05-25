@@ -16,7 +16,7 @@ interface Route {
 
 export const routes: Route[] = [
   { path: '/', Component: BoardPage },
-  { path: '/init-data', Component: InitDataPage, title: 'Init Data' },
+  { path: '/launch', Component: InitDataPage, title: 'Launch new token' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
   { path: '/launch-params', Component: LaunchParamsPage, title: 'Launch Params' },
   { path: '/coin', Component: CoinPage, title: 'Coin Card' },

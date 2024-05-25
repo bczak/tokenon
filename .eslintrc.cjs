@@ -32,5 +32,7 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 0,
+    "@typescript-eslint/no-explicit-any": 0,
+    "no-mixed-spaces-and-tabs": 0,
   }
 };

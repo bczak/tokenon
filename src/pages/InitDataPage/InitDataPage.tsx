@@ -1,101 +1,87 @@
-import { type FC, useMemo } from 'react';
-import { useInitData, useLaunchParams, type User } from '@tma.js/sdk-react';
-import { List, Placeholder } from '@telegram-apps/telegram-ui';
-
-import { DisplayData, type DisplayDataRow } from '@/components/DisplayData/DisplayData.tsx';
-
-import './InitDataPage.css';
-
-function getUserRows(user: User): DisplayDataRow[] {
-  return [
-    { title: 'id', value: user.id.toString() },
-    { title: 'username', value: user.username },
-    { title: 'photo_url', value: user.photoUrl },
-    { title: 'last_name', value: user.lastName },
-    { title: 'first_name', value: user.firstName },
-    { title: 'is_bot', value: user.isBot },
-    { title: 'is_premium', value: user.isPremium },
-    { title: 'language_code', value: user.languageCode },
-    { title: 'allows_to_write_to_pm', value: user.allowsWriteToPm },
-    { title: 'added_to_attachment_menu', value: user.addedToAttachmentMenu },
-  ];
-}
+import {type FC, useEffect, useState,} from 'react';
+import {Button, Input, List, Subheadline, Textarea, Title} from "@telegram-apps/telegram-ui";
+import {useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
+import {useNavigate} from "react-router-dom";
+import {functions, MASTER} from "@/config.ts";
+import {httpsCallable} from 'firebase/functions';
 
 export const InitDataPage: FC = () => {
-  const initDataRaw = useLaunchParams().initDataRaw;
-  const initData = useInitData();
-
-  const initDataRows = useMemo<DisplayDataRow[] | undefined>(() => {
-    if (!initData || !initDataRaw) {
-      return;
-    }
-    const {
-      hash,
-      queryId,
-      chatType,
-      chatInstance,
-      authDate,
-      startParam,
-      canSendAfter,
-      canSendAfterDate,
-    } = initData;
-    return [
-      { title: 'raw', value: initDataRaw },
-      { title: 'auth_date', value: authDate.toLocaleString() },
-      { title: 'auth_date (raw)', value: authDate.getTime() / 1000 },
-      { title: 'hash', value: hash },
-      { title: 'can_send_after', value: canSendAfterDate?.toISOString() },
-      { title: 'can_send_after (raw)', value: canSendAfter },
-      { title: 'query_id', value: queryId },
-      { title: 'start_param', value: startParam },
-      { title: 'chat_type', value: chatType },
-      { title: 'chat_instance', value: chatInstance },
-    ];
-  }, [initData, initDataRaw]);
-
-  const userRows = useMemo<DisplayDataRow[] | undefined>(() => {
-    return initData && initData.user ? getUserRows(initData.user) : undefined;
-  }, [initData]);
-
-  const receiverRows = useMemo<DisplayDataRow[] | undefined>(() => {
-    return initData && initData.receiver ? getUserRows(initData.receiver) : undefined;
-  }, [initData]);
-
-  const chatRows = useMemo<DisplayDataRow[] | undefined>(() => {
-    if (!initData?.chat) {
-      return;
-    }
-    const { id, title, type, username, photoUrl } = initData.chat;
-
-    return [
-      { title: 'id', value: id.toString() },
-      { title: 'title', value: title },
-      { title: 'type', value: type },
-      { title: 'username', value: username },
-      { title: 'photo_url', value: photoUrl },
-    ];
-  }, [initData]);
-
-  if (!initDataRows) {
-    return (
-      <Placeholder
-        header="Oops"
-        description="Application was launched with missing init data"
-      >
-        <img
-          alt="Telegram sticker"
-          src="https://xelene.me/telegram.gif"
-          style={{ display: 'block', width: '144px', height: '144px' }}
-        />
-      </Placeholder>
-    )
-  }
-  return (
-    <List>
-      <DisplayData header={'Init Data'} rows={initDataRows}/>
-      {userRows && <DisplayData header={'User'} rows={userRows}/>}
-      {receiverRows && <DisplayData header={'Receiver'} rows={receiverRows}/>}
-      {chatRows && <DisplayData header={'Chat'} rows={chatRows}/>}
-    </List>
-  )
+	const wallet = useTonWallet();
+	const navigate = useNavigate();
+	const [tonConnectUI] = useTonConnectUI();
+	
+	const [supply, setSupply] = useState<number>(1000000);
+	const [name, setName] = useState<string>('');
+	const [symbol, setSymbol] = useState<string>('');
+	const [description, setDescription] = useState<string>('');
+	const [image, setImage] = useState<string>('');
+	
+	useEffect(() => {
+		if (!wallet) {
+			navigate('/ton-connect', {replace: true});
+		}
+	}, [wallet]);
+	
+	if (!wallet) return null;
+	
+	const handleDeploy = async () => {
+		const prepared = await httpsCallable(functions, "prepareTransaction")({
+			supply: supply,
+			content: {
+				name: name,
+				symbol: symbol,
+				description: description,
+				image: image
+			}
+		})
+		const myTransaction = {
+			validUntil: Math.floor(Date.now() / 1000) + 360,
+			messages: [
+				{
+					address: MASTER,
+					amount: "350000000",
+					payload: prepared.data as string // payload with comment in body
+				}
+			]
+		}
+		console.log(myTransaction);
+		const result = await tonConnectUI.sendTransaction(myTransaction);
+		console.log(result.boc)
+		
+	}
+	
+	const handleSupplyChange = (e: any) => {
+		setSupply(e.target.value);
+	}
+	const handleNameChange = (e: any) => {
+		setName(e.target.value);
+	}
+	const handleSymbolChange = (e: any) => {
+		setSymbol(e.target.value);
+	}
+	const handleDescriptionChange = (e: any) => {
+		setDescription(e.target.value);
+	}
+	const handleImageChange = (e: any) => {
+		setImage(e.target.value);
+	}
+	
+	return <List style={{
+		maxWidth: '100%',
+		margin: 'auto',
+	}}>
+		<Title level="2">Create new token</Title>
+		<Subheadline level={'2'}>Name</Subheadline>
+		<Input value={name} onChange={handleNameChange} header="Symbol" placeholder="TON"/>
+		<Subheadline level={'2'}>Symbol</Subheadline>
+		<Input value={symbol} onChange={handleSymbolChange} header="Input" placeholder="tons"/>
+		<Subheadline level={'2'}>Description</Subheadline>
+		<Textarea value={description} onChange={handleDescriptionChange} header="Textarea" placeholder="Just another memecoin"/>
+		<Subheadline level={'2'}>Description</Subheadline>
+		<Input value={image} onChange={handleImageChange} header="Image" placeholder="https://picsum.photos/300" type={'url'}/>
+		<Subheadline level={'2'}>Total supply</Subheadline>
+		<Input header="Input" placeholder="1000000" value={supply} type={'number'} onChange={handleSupplyChange}/>
+		<Button size={'l'} style={{width: '100%'}} onClick={handleDeploy}>Create and mint</Button>
+		<Subheadline level={'2'}>Cost to deploy = 0.35 TON</Subheadline>
+	</List>
 };
