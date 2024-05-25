@@ -1,10 +1,11 @@
 import React, { useCallback, useState } from 'react'
-import { List, SegmentedControl } from '@telegram-apps/telegram-ui'
+import { List, Section, SegmentedControl } from '@telegram-apps/telegram-ui'
 
 import { BannerComp } from '@/components/banner_comp'
 import { EBoardPageSegmentsControl } from '@/pages/board/BoardPage.types.tsx'
 
 import './BoardPage.css'
+import { CoinCardComp } from '@/components/coin_card_comp'
 
 export const BoardPage: React.FC = () => {
 
@@ -31,6 +32,10 @@ export const BoardPage: React.FC = () => {
           Favorites
         </SegmentedControl.Item>
       </SegmentedControl>
+      <Section
+        >
+          <CoinCardComp id={1} cap={'$5 460,717'} description={'CTO Old dev rugged but we already have 40 in cto vc ready to send this lets go to raydium'} token={'Kabosu Funeral (ticker: KBF)'} img={'/images/coin.png'}/>
+          </Section>
     </List>
   )
 }
