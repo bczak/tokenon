@@ -5,7 +5,7 @@ import {ETradeFromControl} from './TradeFormComp.types';
 import tonSvg from '/src/assets/icons/ton.svg';
 import {ITokenInfo} from "@/pages/board/BoardPage.types.tsx";
 import {toNano} from "@ton/core";
-import {prepareBuy} from "@/pages/CoinPage/utils.ts";
+import {prepareBuy} from "@/pages/coin/utils.ts";
 import {useTonConnectUI} from "@tonconnect/ui-react";
 
 export const TradeFormComp: FC<ITokenInfo> = (data) => {

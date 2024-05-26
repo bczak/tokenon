@@ -1,6 +1,7 @@
 declare global {
   interface Number {
     toDecimals(dec?: number): string,
+    isZero(): boolean
   }
 }
 
@@ -11,6 +12,10 @@ Number.prototype.toDecimals = function (dec = 9) {
   const noTrailingZeros = fixedString.replace(/0+$/, '')
   const stringToFloat = parseFloat(noTrailingZeros)
   return stringToFloat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+}
+
+Number.prototype.isZero = function () {
+  return this === 0
 }
 
 export {}

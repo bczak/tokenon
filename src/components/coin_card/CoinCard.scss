@@ -1,3 +1,7 @@
+.coin-card-wrap {
+  margin-bottom: 8px;
+}
+
 .coin-card {
   border-radius: 10px;
   background-color: #{var(--tg-theme-section-bg-color)};
@@ -12,7 +16,7 @@
   }
 }
 
-.progressLine {
-  margin-bottom: 0.5rem;
+.coin-card-progress-line {
+  margin-top: 4px;
   background-color: #{var(--tg-theme-secondary-bg-color)};
 }

@@ -50,7 +50,7 @@ export const WalletPage: React.FC = () => {
   }, [ userAccountJettons ])
 
   const userAccountJettonsZerosLength = useMemo(() => {
-    return userAccountJettonsPositive.length
+    return userAccountJettonsZeros.length
   }, [ userAccountJettonsZeros ])
 
   useEffect(() => {

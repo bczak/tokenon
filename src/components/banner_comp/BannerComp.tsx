@@ -6,6 +6,11 @@ import './BannerComp.scss'
 import bannerImage from '../../assets/images/borad_page_banner_1.webp'
 
 export const BannerComp: React.FC = () => {
+
+  const handleBannerButtonClick = () => {
+    window.open('https://t.me/tokenon_official')
+  }
+
   return (
     <Banner
       type="section"
@@ -27,6 +32,7 @@ export const BannerComp: React.FC = () => {
       <Button
         mode="white"
         size="s"
+        onClick={ handleBannerButtonClick }
       >
         explore
       </Button>

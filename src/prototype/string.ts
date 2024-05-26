@@ -2,6 +2,7 @@ declare global {
   interface String {
     compact(start?: number, end?: number): string,
     toDecimals(dec?: number): string,
+    isEmpty(): boolean,
   }
 }
 
@@ -17,5 +18,10 @@ String.prototype.toDecimals = function (dec = 9) {
   const stringToFloat = parseFloat(noTrailingZeros)
   return stringToFloat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 }
+
+String.prototype.isEmpty = function () {
+  return this.trim().length === 0
+}
+
 
 export {}

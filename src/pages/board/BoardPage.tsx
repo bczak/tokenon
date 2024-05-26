@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { Headline, List, Section, SegmentedControl } from '@telegram-apps/telegram-ui'
+import { Headline, List, SegmentedControl } from '@telegram-apps/telegram-ui'
 import { useQuery } from '@tanstack/react-query'
 
 import { BannerComp } from '@/components/banner_comp'
@@ -38,7 +38,7 @@ export const BoardPage: React.FC = () => {
           Owned
         </SegmentedControl.Item>
       </SegmentedControl>
-			<Section className="board-coins">
+			<div className="board-coins">
 				{ data.map((token) => (
 					<CoinCard
 						key={ token.address }
@@ -51,7 +51,7 @@ export const BoardPage: React.FC = () => {
 						img={ token.image }
 					/>
 				)) }
-			</Section>
+			</div>
       { activeSegmentBoardControl === EBoardPageSegmentsControl.OWNED && (
         <Headline
           style={ {
