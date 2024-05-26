@@ -10,7 +10,12 @@ String.prototype.compact = function (start = 4, end = 4) {
 }
 
 String.prototype.toDecimals = function (dec = 9) {
-  return (Math.round((parseInt(this.valueOf()) * (10 ** -dec) * (10 ** (dec / 3)))) / (10 ** (dec / 3))).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
+  const stringToNumber = parseInt(this.valueOf())
+  const roundedNumber = Math.round(stringToNumber * (10 ** -dec) * (10 ** (dec / 3))) / (10 ** (dec / 3))
+  const fixedString = roundedNumber.toFixed(2)
+  const noTrailingZeros = fixedString.replace(/0+$/, '')
+  const stringToFloat = parseFloat(noTrailingZeros)
+  return stringToFloat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 }
 
 export {}

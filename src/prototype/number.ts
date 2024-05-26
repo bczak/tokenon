@@ -5,7 +5,12 @@ declare global {
 }
 
 Number.prototype.toDecimals = function (dec = 9) {
-  return (Math.round((this.valueOf() * (10 ** -dec) * (10 ** (dec / 3)))) / (10 ** (dec / 3))).toFixed(3).replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+  const thiValue = this.valueOf()
+  const roundedNumber = Math.round(thiValue * (10 ** -dec) * (10 ** (dec / 3))) / (10 ** (dec / 3))
+  const fixedString = roundedNumber.toFixed(3)
+  const noTrailingZeros = fixedString.replace(/0+$/, '')
+  const stringToFloat = parseFloat(noTrailingZeros)
+  return stringToFloat.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
 }
 
 export {}

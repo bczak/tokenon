@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react'
+import React, { Fragment, useCallback, useEffect, useMemo, useState } from 'react'
 import { TonConnectButton, useTonAddress, useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import {
   Button,
@@ -37,11 +37,27 @@ export const WalletPage: React.FC = () => {
     }
   }, [ userAccount ])
 
+  const userAccountJettonsPositive = useMemo(() => {
+    return userAccountJettons.filter((item) => item.balance !== '0')
+  }, [ userAccountJettons ])
+
+  const userAccountJettonsPositiveLength = useMemo(() => {
+    return userAccountJettonsPositive.length
+  }, [ userAccountJettonsPositive ])
+
+  const userAccountJettonsZeros = useMemo(() => {
+    return userAccountJettons.filter((item) => item.balance === '0')
+  }, [ userAccountJettons ])
+
+  const userAccountJettonsZerosLength = useMemo(() => {
+    return userAccountJettonsPositive.length
+  }, [ userAccountJettonsZeros ])
+
   useEffect(() => {
     if(userTonAddress) {
-      getAccount('UQAQ6i-LfUZCQwcP7TrpEB8P3jASUzsJoXIaNxzGtwRlw0YQ')
+      getAccount(userTonAddress)
         .then((res) => setUserAccount(res))
-      getJettonsBalances('UQAQ6i-LfUZCQwcP7TrpEB8P3jASUzsJoXIaNxzGtwRlw0YQ')
+      getJettonsBalances(userTonAddress)
         .then((res) => setUserAccountJettons(res.balances))
     }
   }, [ userTonAddress ])
@@ -126,47 +142,55 @@ export const WalletPage: React.FC = () => {
           </Modal>
         </div>
       </div>
-      <Subheadline
-        caps
-        level="2"
-      >
-        My Tokens
-      </Subheadline>
-      <div className="wallet-jettons">
-        { userAccountJettons.filter((item) => item.balance !== "0").map((jetton) => (
-          <Jetton
-            key={ jetton.wallet_address.address }
-            { ...jetton }
-          />
-        )) }
-      </div>
-      <div className="wallet-section-header">
-        <Subheadline
-          caps
-          level="2"
-        >
-          Hidden Tokens
-        </Subheadline>
-        <Button
-          mode="plain"
-          size="s"
-          onClick={ handleZeroUserAccountJettonsVisible }
-          style={ {
-            fontWeight: 'normal'
-          } }
-        >
-          { isZeroUserAccountJettonsVisible ? 'hide' : 'show' }
-        </Button>
-      </div>
-      { isZeroUserAccountJettonsVisible && (
-        <div className="wallet-jettons">
-          { userAccountJettons.filter((item) => item.balance === '0').map((jetton) => (
-            <Jetton
-              key={ jetton.wallet_address.address }
-              { ...jetton }
-            />
-          )) }
-        </div>
+      { userAccountJettonsPositiveLength > 0 && (
+        <Fragment>
+          <Subheadline
+            caps
+            level="2"
+          >
+            My Tokens
+          </Subheadline>
+          <div className="wallet-jettons">
+            { userAccountJettonsPositive.filter((item) => item.balance !== '0').map((jetton) => (
+              <Jetton
+                key={ jetton.wallet_address.address }
+                { ...jetton }
+              />
+            )) }
+          </div>
+        </Fragment>
+      ) }
+      { userAccountJettonsZerosLength > 0 && (
+        <Fragment>
+          <div className="wallet-section-header">
+            <Subheadline
+              caps
+              level="2"
+            >
+              Hidden Tokens
+            </Subheadline>
+            <Button
+              mode="plain"
+              size="s"
+              onClick={ handleZeroUserAccountJettonsVisible }
+              style={ {
+                fontWeight: 'normal'
+              } }
+            >
+              { isZeroUserAccountJettonsVisible ? 'hide' : 'show' }
+            </Button>
+          </div>
+          { isZeroUserAccountJettonsVisible && (
+            <div className="wallet-jettons">
+              { userAccountJettons.filter((item) => item.balance === '0').map((jetton) => (
+                <Jetton
+                  key={ jetton.wallet_address.address }
+                  { ...jetton }
+                />
+              )) }
+            </div>
+          ) }
+        </Fragment>
       ) }
     </List>
   )

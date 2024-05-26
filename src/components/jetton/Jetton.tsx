@@ -43,7 +43,14 @@ export const Jetton: React.FC<JettonBalance> = (jetton) => {
       }
       after={
         <div className="jetton__after">
-          <Text>{ jetton.balance.toDecimals(jetton.jetton.decimals) }</Text>
+          <Text
+            style={ {
+              fontSize: '14px',
+              textWrap: 'nowrap'
+            } }
+          >
+            { jetton.balance.toDecimals(jetton.jetton.decimals) }
+          </Text>
         </div>
       }
     >
