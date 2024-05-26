@@ -1,6 +1,6 @@
-import {Image, Text, Subheadline, Cell} from '@telegram-apps/telegram-ui';
-import type {FC} from 'react';
-import {Link} from '@/components/Link/Link.tsx';
+import { Image, Text, Subheadline, Cell } from '@telegram-apps/telegram-ui';
+import type { FC } from 'react';
+import { Link } from '@/components/Link/Link.tsx';
 import './CoinCardComp.scss';
 
 interface CoinCardCompProps {

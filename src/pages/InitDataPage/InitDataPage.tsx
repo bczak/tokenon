@@ -18,7 +18,7 @@ export const InitDataPage: FC = () => {
 	
 	useEffect(() => {
 		if (!wallet) {
-			navigate('/ton-connect', {replace: true});
+			navigate('/wallet', {replace: true});
 		}
 	}, [wallet]);
 	

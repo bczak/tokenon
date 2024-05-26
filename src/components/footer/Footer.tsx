@@ -1,9 +1,7 @@
-import React, {useCallback, useMemo} from 'react'
-import {useLocation, useNavigate} from 'react-router-dom'
-import {Tabbar} from '@telegram-apps/telegram-ui'
-import {IoAlbumsOutline, IoRocketOutline, IoWalletOutline} from 'react-icons/io5'
-
-import './Footer.scss'
+import React, { useCallback, useMemo } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
+import { Tabbar } from '@telegram-apps/telegram-ui'
+import { IoAlbumsOutline, IoRocketOutline, IoWalletOutline } from 'react-icons/io5'
 
 export const Footer: React.FC = () => {
 	const location = useLocation()

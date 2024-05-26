@@ -10,7 +10,7 @@ export const BannerComp: React.FC = () => {
     <Banner
       type="section"
       header="Join our community"
-      subheader="Get all the news from the TON crypto world."
+      subheader="Get all the news from the TON crypto world"
       className="banner-comp"
       background={
         <img
@@ -18,6 +18,7 @@ export const BannerComp: React.FC = () => {
           src={ bannerImage }
           style={ {
             width: '100%',
+            height: '100%',
             objectFit: 'cover'
           } }
         />

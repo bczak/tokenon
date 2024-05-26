@@ -1,8 +1,12 @@
 .cardContainer{
   margin: 0.5rem;
   height: 23.8rem;
+  background-color: var(--tg-theme-section-bg-color);
 
 .chartContainer {
+  .cardCell {
+    color: var(--tg-theme-text-color);
+  }
   .chartImage {
     height: 100% !important;
     width: 100% !important;
