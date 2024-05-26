@@ -2,12 +2,12 @@ import {Caption, Image, Progress, Text} from '@telegram-apps/telegram-ui';
 import {type FC} from 'react';
 import './CoinInfoComp.scss';
 import {useThemeParams} from '@tma.js/sdk-react';
-import {TokenInfo} from '@/pages/board/BoardPage.types';
+import {ITokenInfo} from '@/pages/board/BoardPage.types';
 
-export const CoinInfoComp: FC<TokenInfo> = (data) => {
+export const CoinInfoComp: FC<ITokenInfo> = (data) => {
 	const themeParams = useThemeParams()
 	const progress = 35;
-	
+
 	return (
 		<>
 			<div className='coinInfoContainer'>

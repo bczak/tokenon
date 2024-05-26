@@ -1,10 +1,11 @@
 export enum EBoardPageSegmentsControl {
-	RECENT = 'recent',
-	FAVORITES = 'favorites'
+	
+	OWNED = 'owned',
+	RECENT = 'recent'
 }
 
 
-export interface TokenInfo {
+export interface ITokenInfo {
 	address: string,
 	symbol: string,
 	name: string,
@@ -12,5 +13,5 @@ export interface TokenInfo {
 	image: string,
 	balance: bigint,
 	tonBalance: bigint,
-	curve: string,
+	curve: string
 }
