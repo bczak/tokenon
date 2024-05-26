@@ -30,8 +30,7 @@ export const BannerComp: React.FC = () => {
       }
     >
       <Button
-        mode="white"
-        size="s"
+        mode="gray"
         onClick={ handleBannerButtonClick }
       >
         explore
