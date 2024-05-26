@@ -5,11 +5,11 @@ import {ETradeFromControl} from './TradeFormComp.types';
 import tonSvg from '/src/assets/icons/ton.svg';
 import {ITokenInfo} from "@/pages/board/BoardPage.types.tsx";
 import {toNano} from "@ton/core";
-import {prepareBuy, prepareSell} from "@/pages/CoinPage/utils.ts";
 import {useTonConnectUI, useTonWallet} from "@tonconnect/ui-react";
 import {client} from "@/api/client.ts";
 import {useQuery} from "@tanstack/react-query";
 import {getJettonBalance} from "@/api";
+import {prepareBuy, prepareSell} from "@/pages/coin/utils.ts";
 
 export const TradeFormComp: FC<ITokenInfo> = (data) => {
 	const [inputValue, setInputValue] = useState('');

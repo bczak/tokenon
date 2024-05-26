@@ -1,4 +1,9 @@
+.coin-card-wrap {
+  margin-bottom: 8px;
+}
+
 .coin-card {
+  border-radius: 10px;
   background-color: #{var(--tg-theme-section-bg-color)};
 
   &__ticker {
@@ -9,4 +14,9 @@
   &__cap-value {
     color: #{var(--tg-theme-button-color)};
   }
+}
+
+.coin-card-progress-line {
+  margin-top: 4px;
+  background-color: #{var(--tg-theme-secondary-bg-color)};
 }
