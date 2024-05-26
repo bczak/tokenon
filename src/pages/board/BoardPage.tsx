@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react'
-import { List, Section, SegmentedControl } from '@telegram-apps/telegram-ui'
+import { Headline, List, Section, SegmentedControl } from '@telegram-apps/telegram-ui'
 import { useQuery } from '@tanstack/react-query'
 
 import { BannerComp } from '@/components/banner_comp'
@@ -10,7 +10,6 @@ import { fetchTokens } from '@/api/tokens'
 import './BoardPage.css'
 
 export const BoardPage: React.FC = () => {
-
   const [ activeSegmentBoardControl, setActiveSegmentBoardControl ] = useState<EBoardPageSegmentsControl>(EBoardPageSegmentsControl.RECENT)
 
   const handleSegmentBoardControlChange = useCallback((segment: EBoardPageSegmentsControl) => {
@@ -18,8 +17,8 @@ export const BoardPage: React.FC = () => {
   }, [ setActiveSegmentBoardControl ])
 
   const { data = [] } = useQuery({
-    queryKey: [ 'tokens' ],
-    queryFn: fetchTokens
+    queryKey: [ activeSegmentBoardControl === EBoardPageSegmentsControl.RECENT ? 'tokens' : 'owned_tokens' ],
+    queryFn: activeSegmentBoardControl === EBoardPageSegmentsControl.RECENT ? fetchTokens : () => []
   })
 
   return (
@@ -39,7 +38,7 @@ export const BoardPage: React.FC = () => {
           Owned
         </SegmentedControl.Item>
       </SegmentedControl>
-			<Section>
+			<Section className="board-coins">
 				{ data.map((token) => (
 					<CoinCard
 						key={ token.address }
@@ -47,11 +46,22 @@ export const BoardPage: React.FC = () => {
 						address={ token.address }
 						cap={ token.tonBalance }
             description={ token.description }
-						token={ `${ token.name } (ticker: ${ token.symbol })` }
+						tokenName={ token.name }
+            tokenTicker={ token.symbol }
 						img={ token.image }
 					/>
 				)) }
 			</Section>
+      { activeSegmentBoardControl === EBoardPageSegmentsControl.OWNED && (
+        <Headline
+          style={ {
+            marginTop: '50px',
+            textAlign: 'center'
+          } }
+        >
+          Coming soon
+        </Headline>
+      ) }
     </List>
   )
 }

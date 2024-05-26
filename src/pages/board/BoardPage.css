@@ -1,3 +1,8 @@
+.board-coins {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .index-page__links {
   list-style: none;
   padding-left: 0;

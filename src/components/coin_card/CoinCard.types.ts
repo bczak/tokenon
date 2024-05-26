@@ -4,5 +4,6 @@ export interface ICoinCardProps {
   curve: string,
   description: string,
   img: string,
-  token: string,
+  tokenName: string,
+  tokenTicker?: string,
 }
