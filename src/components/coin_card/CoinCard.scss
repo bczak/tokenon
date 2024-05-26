@@ -1,17 +1,9 @@
 .coin-card {
-  margin-bottom: 8px;
-  border-radius: 10px;
   background-color: #{var(--tg-theme-section-bg-color)};
 
   &__ticker {
-    font-size: 16px;
     font-weight: 500;
     color: #{var(--tg-theme-text-color)};
-  }
-
-  &__cap-text,
-  &__cap-value {
-    font-size: 14px;
   }
 
   &__cap-value {
