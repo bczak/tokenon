@@ -1,17 +1,23 @@
 import {Caption, Image, Progress, Text} from '@telegram-apps/telegram-ui';
-import {type FC} from 'react';
+import {type FC, useCallback, useState} from 'react';
 import './CoinInfoComp.scss';
 import {useThemeParams} from '@tma.js/sdk-react';
 import {ITokenInfo} from '@/pages/board/BoardPage.types';
+import jettonDefaultImage from "@/assets/images/jetton_default_image.webp";
 
 export const CoinInfoComp: FC<ITokenInfo> = (data) => {
 	const themeParams = useThemeParams()
 	const progress = 35;
-
+	
+	const [coinImage, setCoinImage] = useState(data.image)
+	
+	const onImageError = useCallback(() => {
+		setCoinImage(jettonDefaultImage)
+	}, [setCoinImage])
 	return (
 		<>
 			<div className='coinInfoContainer'>
-				<Image className='coinImage' src={data.image}/>
+				<Image className='coinImage' src={coinImage} onError={onImageError}/>
 				<div className='infoContainer'>
 					<Text className='tokenText' style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">{`${data.name} (ticker: ${data.symbol})`}</Text>
 					<div className='marketCap'>

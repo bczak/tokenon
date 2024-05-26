@@ -11,6 +11,7 @@ export interface ITokenInfo {
 	name: string,
 	description: string,
 	image: string,
+	supply: bigint,
 	balance: bigint,
 	tonBalance: bigint,
 	curve: string

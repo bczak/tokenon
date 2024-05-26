@@ -34,6 +34,7 @@ export const fetchTokens = async (): Promise<ITokenInfo[]> => {
 				name: data.metadata.name,
 				symbol: data.metadata.symbol,
 				balance: balance,
+				supply: BigInt(data.total_supply),
 				tonBalance: BigInt(account.balance),
 				curve: curve
 			} as ITokenInfo
