@@ -3,26 +3,26 @@ import './TradeFormComp.scss';
 import {Button, Input, Section, SegmentedControl, Image, Text, Subheadline} from '@telegram-apps/telegram-ui';
 import {ETradeFromControl} from './TradeFormComp.types';
 import tonSvg from '/src/assets/icons/ton.svg';
-import {TokenInfo} from "@/pages/board/BoardPage.types.tsx";
+import {ITokenInfo} from "@/pages/board/BoardPage.types.tsx";
 import {toNano} from "@ton/core";
 import {prepareBuy} from "@/pages/CoinPage/utils.ts";
 
-export const TradeFormComp: FC<TokenInfo> = (data) => {
+export const TradeFormComp: FC<ITokenInfo> = (data) => {
 	const [inputValue, setInputValue] = useState('');
-	
+
 	const [activeSegmentTradeFormControl, setActiveSegmentTradeFormControl] = useState<ETradeFromControl>(ETradeFromControl.BUY)
-	
+
 	const handleSegmentTradeFormControlChange = useCallback((segment: ETradeFromControl) => {
 		setActiveSegmentTradeFormControl(segment)
 	}, [setActiveSegmentTradeFormControl])
-	
+
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = e.target.value;
 		if (/^\d*\.?\d*$/.test(newValue)) {
 			setInputValue(newValue);
 		}
 	}
-	
+
 	const handleTransaction = async () => {
 		if (activeSegmentTradeFormControl === ETradeFromControl.BUY) {
 			alert(`Buy ${inputValue}`);
@@ -41,13 +41,13 @@ export const TradeFormComp: FC<TokenInfo> = (data) => {
 			alert(`Sell ${inputValue}`);
 		}
 	}
-	
+
 	const coinName = data.name
 	const coinImg = data.image
-	
+
 	const tonDiv = <div className='inputAfterContainer'><Text>TON</Text><Image className='tonCoinImg' src={tonSvg}/></div>
 	const coinDiv = <div className='inputAfterContainer'><Text>{coinName}</Text><Image className='coinImg' src={coinImg}/></div>
-	
+
 	return (
 		<div className='tradeFormContainer'>
 			<Section className="tradeFormSection">

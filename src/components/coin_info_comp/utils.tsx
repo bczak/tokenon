@@ -1,9 +1,9 @@
-import {TokenInfo} from "@/pages/board/BoardPage.types.tsx";
+import {ITokenInfo} from "@/pages/board/BoardPage.types.tsx";
 import {client} from "@/api/client.ts";
 import {Cell} from "@ton/core";
 import {Buffer} from "buffer";
 
-export const fetchTokenByCurve = async (curve: string): Promise<TokenInfo> => {
+export const fetchTokenByCurve = async (curve: string): Promise<ITokenInfo> => {
 	console.log('fetched events')
 	const result = await client.blockchain.execGetMethodForBlockchainAccount(curve, 'token');
 	const hex = result.stack[0].cell;
@@ -18,6 +18,6 @@ export const fetchTokenByCurve = async (curve: string): Promise<TokenInfo> => {
 		name: data.metadata.name,
 		symbol: data.metadata.symbol,
 		balance: 0n
-	} as TokenInfo;
-	
+	} as ITokenInfo;
+
 }
