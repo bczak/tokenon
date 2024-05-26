@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import './ChartComp.scss'
-import { Text, Card, Accordion, Blockquote } from '@telegram-apps/telegram-ui';
+import { Text, Card, Accordion } from '@telegram-apps/telegram-ui';
 import chartImage from '../../assets/images/chart.jpeg'
 import { CardCell } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardCell/CardCell';
 import { CardChip } from '@telegram-apps/telegram-ui/dist/components/Blocks/Card/components/CardChip/CardChip';
