@@ -1,15 +1,33 @@
-.cardContainer{
-  margin: 0.5rem;
-  height: 23.8rem;
+.chartComp {
   background-color: var(--tg-theme-section-bg-color);
+  color: var(--tg-theme-text-color);
+  border-radius: 10px;
+  margin: 1rem 0.5rem;
 
-.chartContainer {
-  .cardCell {
-    color: var(--tg-theme-text-color);
+  .accordionSummary {
+    border-radius: 10px;
   }
-  .chartImage {
-    height: 100% !important;
-    width: 100% !important;
+
+  .accordionSummary:hover {
+    background-color: var(--tg-theme-section-bg-color);
+  }
+
+  .accordionContent {
+    .cardContainer{
+      border-radius: 0;
+      height: 23.8rem;
+      background-color: var(--tg-theme-section-bg-color);
+    
+    .chartContainer {
+      .cardCell {
+        background-color: var(--tg-theme-section-bg-color);
+        color: var(--tg-theme-text-color);
+      }
+      .chartImage {
+        height: 100% !important;
+        width: 100% !important;
+      }
+    }
   }
 }
 }

@@ -20,8 +20,7 @@ export const CoinInfoComp: FC<CoinInfoCompProps>  = ({id, img, cap, description,
         <div className='coinInfoContainer'>
             <Image className='coinImage' src={img} />
             <div className='infoContainer'>
-            {/* <Text>{id}</Text> */}
-            <Text style={{ color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">{token}</Text>
+                <Text className='tokenText' style={{ color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">{token}</Text>
             <div className='marketCap'>
                 <Caption className='capText'>Market cap: </Caption>
                 <Caption className='capValue'>{cap}</Caption>
