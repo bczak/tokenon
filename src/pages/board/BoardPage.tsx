@@ -22,6 +22,8 @@ export const BoardPage: React.FC = () => {
 		queryFn: fetchTokens
 	})
 	
+	console.log(data)
+	
 	
 	return (
 		<List className="page">
