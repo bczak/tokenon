@@ -1,10 +1,9 @@
 .tradeFormContainer {
     margin: 1rem 0.5rem 0 0.5rem;
-    
+
     .tradeFormSection {
-        border-radius: 15px;
+        border-radius: 10px;
         margin: auto;
-        border: 2px solid var(--tg-theme-section-bg-color);
         background: var(--tg-theme-section-bg-color);
 
         .segment {
@@ -12,11 +11,11 @@
         }
 
         .activeBuy {
-            background-color: lightgreen;
+            background-color: #04AA6D;
         }
-        
+
         .activeSell {
-            background-color: lightcoral;
+            background-color: #f44336;
         }
 
         .tradeFormInput, .tradeFormButton {
@@ -39,8 +38,7 @@
         }
 
         .tonCoinImg {
-            margin-left: 0.5rem;
-            background-color: #007AFF;
+            margin-left: 4px;
         }
 
         .coinImg {
