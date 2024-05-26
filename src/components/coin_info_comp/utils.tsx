@@ -17,8 +17,14 @@ export const fetchTokenByCurve = async (curve: string): Promise<TokenInfo> => {
 		description: data.metadata.description,
 		name: data.metadata.name,
 		symbol: data.metadata.symbol,
-		balance: 0n,
+		balance: BigInt((await fetchCurveBalance(curve, token!)).balance),
+		tonBalance: 0n,
 		curve: curve!
 	} as TokenInfo;
 	
+}
+
+export const fetchCurveBalance = async (curve: string, token: string) => {
+	const tokens = await client.jettons.getJettonHolders(token);
+	return tokens.addresses.filter((item) => item.address === curve)[0]
 }
