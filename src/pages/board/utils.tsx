@@ -1,7 +1,6 @@
 import {TokenInfo} from "@/pages/board/BoardPage.types.tsx";
 import {MASTER} from "@/config.ts";
 import {client} from "@/api/client.ts";
-import {Cell} from "@ton/core";
 
 export const fetchTokens = async (): Promise<TokenInfo[]> => {
 	// const res = await fetch(`https://tonapi.io/v2/accounts/${MASTER}/events?limit=100`);

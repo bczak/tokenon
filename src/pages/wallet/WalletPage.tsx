@@ -1,17 +1,15 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
-import { useThemeParams, useUtils } from '@tma.js/sdk-react'
 import { TonConnectButton, useTonAddress, useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import {
   Button,
   Cell,
   Chip,
-  Image,
   LargeTitle,
   List,
   Modal,
   Placeholder,
   Subheadline,
-  Text, Title
+  Text
 } from '@telegram-apps/telegram-ui'
 import { Account, JettonsBalances } from 'tonapi-sdk-js'
 import { IoExitOutline } from 'react-icons/io5'
@@ -28,8 +26,6 @@ export const WalletPage: React.FC = () => {
   const wallet = useTonWallet()
   const [ walletConnect ] = useTonConnectUI()
   const userTonAddress = useTonAddress()
-  const utils = useUtils()
-  const themeParams = useThemeParams()
 
   const [ userAccount, setUserAccount ] = useState<Account>()
   const [ userAccountJettons, setUserAccountJettons ] = useState<JettonsBalances['balances']>([])
