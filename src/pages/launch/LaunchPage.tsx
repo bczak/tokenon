@@ -1,4 +1,4 @@
-import { type FC, useEffect, useMemo, useState } from 'react'
+import { type FC, useEffect, useState } from 'react'
 import { Button, Input, List, Subheadline, Text, Textarea, Title } from '@telegram-apps/telegram-ui'
 import { useTonConnectUI, useTonWallet } from '@tonconnect/ui-react'
 import { httpsCallable } from 'firebase/functions'
