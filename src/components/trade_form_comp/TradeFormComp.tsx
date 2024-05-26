@@ -6,10 +6,11 @@ import tonSvg from '/src/assets/icons/ton.svg';
 import {ITokenInfo} from "@/pages/board/BoardPage.types.tsx";
 import {toNano} from "@ton/core";
 import {prepareBuy} from "@/pages/CoinPage/utils.ts";
+import {useTonConnectUI} from "@tonconnect/ui-react";
 
 export const TradeFormComp: FC<ITokenInfo> = (data) => {
 	const [inputValue, setInputValue] = useState('');
-
+	const [tonConnect] = useTonConnectUI()
 	const [activeSegmentTradeFormControl, setActiveSegmentTradeFormControl] = useState<ETradeFromControl>(ETradeFromControl.BUY)
 
 	const handleSegmentTradeFormControlChange = useCallback((segment: ETradeFromControl) => {
@@ -25,7 +26,6 @@ export const TradeFormComp: FC<ITokenInfo> = (data) => {
 
 	const handleTransaction = async () => {
 		if (activeSegmentTradeFormControl === ETradeFromControl.BUY) {
-			alert(`Buy ${inputValue}`);
 			const myTransaction = {
 				validUntil: Math.floor(Date.now() / 1000) + 360,
 				messages: [
@@ -36,7 +36,11 @@ export const TradeFormComp: FC<ITokenInfo> = (data) => {
 					}
 				]
 			}
-			alert(myTransaction)
+			try {
+				await tonConnect.sendTransaction(myTransaction, {modals: 'all'})
+			} catch (e) {
+				alert("Error happened, please try again")
+			}
 		} else {
 			alert(`Sell ${inputValue}`);
 		}

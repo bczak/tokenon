@@ -12,12 +12,13 @@ export const fetchTokenByCurve = async (curve: string): Promise<ITokenInfo> => {
 	const data = await client.jettons.getJettonInfo(token!);
 	console.log('fetched token', curve)
 	return {
-		address: curve!,
+		address: token!,
 		image: data.metadata.image,
 		description: data.metadata.description,
 		name: data.metadata.name,
 		symbol: data.metadata.symbol,
-		balance: 0n
+		balance: 0n,
+		curve: curve!
 	} as ITokenInfo;
 
 }
