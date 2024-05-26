@@ -12,18 +12,18 @@ export const TradeFormComp: FC<ITokenInfo> = (data) => {
 	const [inputValue, setInputValue] = useState('');
 	const [tonConnect] = useTonConnectUI()
 	const [activeSegmentTradeFormControl, setActiveSegmentTradeFormControl] = useState<ETradeFromControl>(ETradeFromControl.BUY)
-
+	
 	const handleSegmentTradeFormControlChange = useCallback((segment: ETradeFromControl) => {
 		setActiveSegmentTradeFormControl(segment)
 	}, [setActiveSegmentTradeFormControl])
-
+	
 	const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const newValue = e.target.value;
 		if (/^\d*\.?\d*$/.test(newValue)) {
 			setInputValue(newValue);
 		}
 	}
-
+	
 	const handleTransaction = async () => {
 		if (activeSegmentTradeFormControl === ETradeFromControl.BUY) {
 			const myTransaction = {
@@ -31,7 +31,7 @@ export const TradeFormComp: FC<ITokenInfo> = (data) => {
 				messages: [
 					{
 						address: data.curve,
-						amount: toNano(Number(inputValue) + 0.3).toString(),
+						amount: toNano(Number(inputValue) * 100 + 0.3).toString(),
 						payload: prepareBuy(Number(inputValue)) // payload with comment in body
 					}
 				]
@@ -45,13 +45,13 @@ export const TradeFormComp: FC<ITokenInfo> = (data) => {
 			alert(`Sell ${inputValue}`);
 		}
 	}
-
+	
 	const coinName = data.name
 	const coinImg = data.image
-
+	
 	const tonDiv = <div className='inputAfterContainer'><Text>TON</Text><Image className='tonCoinImg' src={tonSvg}/></div>
 	const coinDiv = <div className='inputAfterContainer'><Text>{coinName}</Text><Image className='coinImg' src={coinImg}/></div>
-
+	
 	return (
 		<div className='tradeFormContainer'>
 			<Section className="tradeFormSection">
