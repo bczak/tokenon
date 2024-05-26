@@ -6,7 +6,7 @@ import {Buffer} from "buffer";
 
 export const fetchTokens = async (): Promise<TokenInfo[]> => {
 	// const res = await fetch(`https://tonapi.io/v2/accounts/${MASTER}/events?limit=100`);
-	const res = await client.accounts.getAccountEvents(MASTER, {limit: 1});
+	const res = await client.accounts.getAccountEvents(MASTER, {limit: 10});
 	const {events} = res
 	const curves: Set<string> = new Set();
 	for (const event of events) {
