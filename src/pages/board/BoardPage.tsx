@@ -45,7 +45,7 @@ export const BoardPage: React.FC = () => {
 						key={ token.address }
 						curve={ token.curve }
 						address={ token.address }
-						cap={ token.balance }
+						cap={ token.tonBalance }
             description={ token.description }
 						token={ `${ token.name } (ticker: ${ token.symbol })` }
 						img={ token.image }

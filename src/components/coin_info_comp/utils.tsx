@@ -12,6 +12,7 @@ export const fetchTokenByCurve = async (curve: string): Promise<ITokenInfo> => {
 	const data = await client.jettons.getJettonInfo(token!);
 	console.log('fetched token', curve)
 	const balance = await fetchCurveBalance(curve, token!)
+	const account = await client.accounts.getAccount(curve);
 	return {
 		address: token!,
 		image: data.metadata.image,
@@ -19,7 +20,7 @@ export const fetchTokenByCurve = async (curve: string): Promise<ITokenInfo> => {
 		name: data.metadata.name,
 		symbol: data.metadata.symbol,
 		balance: balance,
-		tonBalance: 0n,
+		tonBalance: BigInt(account.balance),
 		curve: curve!
 	} as ITokenInfo;
 	

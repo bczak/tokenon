@@ -16,7 +16,8 @@ export const CoinCard: React.FC<ICoinCardProps> = (props) => {
 	const onImageError = useCallback(() => {
 		setCoinImage(jettonDefaultImage)
 	}, [ setCoinImage ])
-
+	
+	console.log('coin card', curve, img, cap, description, token)
   return (
 		<Link to={ `/coin/${ curve }` }>
 			<Cell
@@ -31,7 +32,7 @@ export const CoinCard: React.FC<ICoinCardProps> = (props) => {
 				subhead={
 					<>
 						<Text className="coin-card__cap-text">Market cap: </Text>
-						<Text className="coin-card__cap-value">{ Number(cap / 10n ** 9n).toLocaleString() }</Text>
+						<Text className="coin-card__cap-value">{ (Number(cap) / Number(10n ** 9n)).toFixed(2) }</Text>
 					</>
 				}
 			>

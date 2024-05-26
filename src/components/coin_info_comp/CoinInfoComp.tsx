@@ -16,7 +16,7 @@ export const CoinInfoComp: FC<ITokenInfo> = (data) => {
 					<Text className='tokenText' style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">{`${data.name} (ticker: ${data.symbol})`}</Text>
 					<div className='marketCap'>
 						<Caption className='capText'>Market cap: </Caption>
-						<Caption className='capValue'>{Number(data?.balance / 10n ** 9n).toLocaleString()}</Caption>
+						<Caption className='capValue'>{(Number(data?.tonBalance) / Number(10n ** 9n)).toFixed(2)}</Caption>
 					</div>
 					<Text style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} className='description'>{data.description}</Text>
 				</div>
