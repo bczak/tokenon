@@ -2,7 +2,6 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { TonConnectButton, useTonAddress, useTonWallet, useTonConnectUI } from '@tonconnect/ui-react'
 import {
   Button,
-  Cell,
   Chip,
   LargeTitle,
   List,
@@ -14,8 +13,8 @@ import {
 import { Account, JettonsBalances } from 'tonapi-sdk-js'
 import { IoExitOutline } from 'react-icons/io5'
 
-import { DisplayData } from '@/components/DisplayData/DisplayData.tsx'
 import { getAccount, getJettonsBalances } from '@/api'
+import { Jetton } from '@/components/jetton'
 
 import tonIconBg from '../../assets/icons/ton_bg.svg'
 import walletDisconnectImage from '../../assets/images/disconnect.gif'
@@ -30,10 +29,11 @@ export const WalletPage: React.FC = () => {
   const [ userAccount, setUserAccount ] = useState<Account>()
   const [ userAccountJettons, setUserAccountJettons ] = useState<JettonsBalances['balances']>([])
   const [ isDisconnectWalletVisible, setDisconnectWalletVisible ] = useState<boolean>(false)
+  const [ isZeroUserAccountJettonsVisible, setZeroUserAccountJettonsVisible ] = useState<boolean>(false)
 
   const userCurrentBalance = useMemo(() => {
     if (userAccount) {
-      return userAccount.balance.toTON()
+      return userAccount.balance.toDecimals()
     }
   }, [ userAccount ])
 
@@ -50,9 +50,14 @@ export const WalletPage: React.FC = () => {
     setDisconnectWalletVisible(value)
   }, [ setDisconnectWalletVisible ])
 
+  const handleZeroUserAccountJettonsVisible = useCallback(() => {
+    setZeroUserAccountJettonsVisible((prev) => !prev)
+  }, [ setZeroUserAccountJettonsVisible ])
+
   const handleDisconnectWalletButton = useCallback(() => {
-    walletConnect.disconnect()
-    setDisconnectWalletVisible(false)
+    walletConnect.disconnect().then(() => {
+      setDisconnectWalletVisible(false)
+    })
   }, [ walletConnect, setDisconnectWalletVisible ])
 
   // Wallet doesn't connect with ton
@@ -74,17 +79,6 @@ export const WalletPage: React.FC = () => {
       />
     )
   }
-
-  const {
-    account: { chain, publicKey, address, walletStateInit },
-    device: {
-      appName,
-      appVersion,
-      maxProtocolVersion,
-      platform,
-      features
-    }
-  } = wallet
 
   return (
     <List className="scrolling-page">
@@ -139,71 +133,41 @@ export const WalletPage: React.FC = () => {
         My Tokens
       </Subheadline>
       <div className="wallet-jettons">
-        { userAccountJettons.map((jetton) => (
-          <Cell
-            className="wallet-jettons__item"
-            hovered
+        { userAccountJettons.filter((item) => item.balance !== "0").map((jetton) => (
+          <Jetton
             key={ jetton.wallet_address.address }
-            description={
-              <Text
-                style={ {
-                  fontSize: '10px'
-                } }
-              >
-                { jetton.jetton.symbol }
-              </Text>
-            }
-            before={
-              <img
-                className="wallet-jettons__item__img"
-                src={ jetton.jetton.image }
-                alt={ jetton.jetton.name }
-              />
-            }
-            after={
-              <div className="wallet-jettons__item__after">
-                <Text>{ jetton.balance.toTON() }</Text>
-              </div>
-            }
-          >
-            <Text
-              weight="2"
-              style={ {
-                fontSize: '14px'
-              }}
-            >
-            { jetton.jetton.name }
-            </Text>
-          </Cell>
+            { ...jetton }
+          />
         )) }
       </div>
-      <List>
-        <DisplayData
-          header="Account"
-          rows={ [
-            { title: 'Address', value: address },
-            { title: 'Chain', value: chain },
-            { title: 'Public Key', value: publicKey },
-            { title: 'Wallet state init', value: walletStateInit }
-          ] }
-        />
-        <DisplayData
-          header="Device"
-          rows={ [
-            { title: 'App Name', value: appName },
-            { title: 'App Version', value: appVersion },
-            { title: 'Max Protocol Version', value: maxProtocolVersion },
-            { title: 'Platform', value: platform },
-            {
-              title: 'Features',
-              value: features
-                .map(f => typeof f === 'object' ? f.name : undefined)
-                .filter(v => v)
-                .join(', ')
-            }
-          ] }
-        />
-      </List>
+      <div className="wallet-section-header">
+        <Subheadline
+          caps
+          level="2"
+        >
+          Hidden Tokens
+        </Subheadline>
+        <Button
+          mode="plain"
+          size="s"
+          onClick={ handleZeroUserAccountJettonsVisible }
+          style={ {
+            fontWeight: 'normal'
+          } }
+        >
+          { isZeroUserAccountJettonsVisible ? 'hide' : 'show' }
+        </Button>
+      </div>
+      { isZeroUserAccountJettonsVisible && (
+        <div className="wallet-jettons">
+          { userAccountJettons.filter((item) => item.balance === '0').map((jetton) => (
+            <Jetton
+              key={ jetton.wallet_address.address }
+              { ...jetton }
+            />
+          )) }
+        </div>
+      ) }
     </List>
   )
 }

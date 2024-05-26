@@ -45,20 +45,10 @@
 
 .wallet-jettons {
   margin-top: 16px;
+}
 
-  &__item {
-    border-radius: 10px;
-    margin-bottom: 16px;
-
-    &__img {
-      width: 40px;
-      height: 40px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-
-    &__name {
-      font-size: 10px;
-    }
-  }
+.wallet-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
