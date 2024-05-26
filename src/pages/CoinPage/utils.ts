@@ -1,7 +1,6 @@
 import {beginCell, Builder, toNano} from "@ton/core";
 
 export function prepareBuy(amount: number): string {
-	alert(toNano(amount.toString()))
 	const body = beginCell().store(storeBuyToken({amount: toNano(amount.toString()), queryId: BigInt(Date.now())})).endCell();
 	return body.toBoc().toString("base64");
 }

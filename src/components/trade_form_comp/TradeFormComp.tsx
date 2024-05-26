@@ -36,12 +36,10 @@ export const TradeFormComp: FC<TokenInfo> = (data) => {
 					}
 				]
 			}
-			alert(JSON.stringify(myTransaction))
 			try {
-				const result = await tonConnect.sendTransaction(myTransaction, {modals: 'all' })
-				alert(JSON.stringify(result))
+				await tonConnect.sendTransaction(myTransaction, {modals: 'all'})
 			} catch (e) {
-				alert(JSON.stringify(e))
+				alert("Error happened, please try again")
 			}
 		} else {
 			alert(`Sell ${inputValue}`);
