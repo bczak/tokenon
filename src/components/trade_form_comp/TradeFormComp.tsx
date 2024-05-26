@@ -6,10 +6,11 @@ import tonSvg from '/src/assets/icons/ton.svg';
 import {TokenInfo} from "@/pages/board/BoardPage.types.tsx";
 import {toNano} from "@ton/core";
 import {prepareBuy} from "@/pages/CoinPage/utils.ts";
+import {useTonConnectUI} from "@tonconnect/ui-react";
 
 export const TradeFormComp: FC<TokenInfo> = (data) => {
 	const [inputValue, setInputValue] = useState('');
-	
+	const [tonConnect] = useTonConnectUI()
 	const [activeSegmentTradeFormControl, setActiveSegmentTradeFormControl] = useState<ETradeFromControl>(ETradeFromControl.BUY)
 	
 	const handleSegmentTradeFormControlChange = useCallback((segment: ETradeFromControl) => {
@@ -25,7 +26,6 @@ export const TradeFormComp: FC<TokenInfo> = (data) => {
 	
 	const handleTransaction = async () => {
 		if (activeSegmentTradeFormControl === ETradeFromControl.BUY) {
-			alert(`Buy ${inputValue}`);
 			const myTransaction = {
 				validUntil: Math.floor(Date.now() / 1000) + 360,
 				messages: [
@@ -36,7 +36,13 @@ export const TradeFormComp: FC<TokenInfo> = (data) => {
 					}
 				]
 			}
-			alert(myTransaction)
+			alert(JSON.stringify(myTransaction))
+			try {
+				const result = await tonConnect.sendTransaction(myTransaction, {modals: 'all' })
+				alert(JSON.stringify(result))
+			} catch (e) {
+				alert(JSON.stringify(e))
+			}
 		} else {
 			alert(`Sell ${inputValue}`);
 		}
