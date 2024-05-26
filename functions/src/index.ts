@@ -1,7 +1,6 @@
 import {Sha256} from "@aws-crypto/sha256-js";
 import {Dictionary, beginCell, Cell, Builder, toNano} from "@ton/core";
 import {onCall} from "firebase-functions/v2/https";
-import {logger} from "firebase-functions";
 
 export const prepareTransaction = onCall(async (context) => {
 	const data = context.data as { content: any, supply: number };
@@ -11,15 +10,7 @@ export const prepareTransaction = onCall(async (context) => {
 		content: await buildOnchainMetadata(data.content)
 	});
 	return body.toBoc().toString("base64");
-	
 });
-
-
-export const deployToken = onCall(async (context) => {
-	const boc = context.data as string;
-	const cell = Cell.fromBase64(boc);
-	logger.log(cell.toString());
-})
 
 
 const ONCHAIN_CONTENT_PREFIX = 0x00;

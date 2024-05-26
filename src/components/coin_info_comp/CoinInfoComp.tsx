@@ -2,36 +2,25 @@ import {Caption, Image, Progress, Text} from '@telegram-apps/telegram-ui';
 import {type FC} from 'react';
 import './CoinInfoComp.scss';
 import {useThemeParams} from '@tma.js/sdk-react';
-import {useParams} from 'react-router-dom';
 import {TokenInfo} from '@/pages/board/BoardPage.types';
-import {useQuery} from "@tanstack/react-query";
-import {fetchTokenByAddress} from './utils';
 
-export const CoinInfoComp: FC = () => {
+export const CoinInfoComp: FC<TokenInfo> = (data) => {
 	const themeParams = useThemeParams()
 	const progress = 35;
-	const {address} = useParams<{ address: string }>();
-	
-	const {data} = useQuery<TokenInfo | null>({
-		queryKey: ['token', address],
-		queryFn: () => fetchTokenByAddress(address!),
-	})
 	
 	return (
 		<>
-			{data && (
-				<div className='coinInfoContainer'>
-					<Image className='coinImage' src={data.image}/>
-					<div className='infoContainer'>
-						<Text className='tokenText' style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">{`${data.name} (ticker: ${data.symbol})`}</Text>
-						<div className='marketCap'>
-							<Caption className='capText'>Market cap: </Caption>
-							<Caption className='capValue'>{Number(data?.balance / 10n ** 9n).toLocaleString()}</Caption>
-						</div>
-						<Text style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} className='description'>{data.description}</Text>
+			<div className='coinInfoContainer'>
+				<Image className='coinImage' src={data.image}/>
+				<div className='infoContainer'>
+					<Text className='tokenText' style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">{`${data.name} (ticker: ${data.symbol})`}</Text>
+					<div className='marketCap'>
+						<Caption className='capText'>Market cap: </Caption>
+						<Caption className='capValue'>{Number(data?.balance / 10n ** 9n).toLocaleString()}</Caption>
 					</div>
+					<Text style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} className='description'>{data.description}</Text>
 				</div>
-			)}
+			</div>
 			<div className='progressContainer'>
 				<Text style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">Progress</Text>
 				<Progress style={{backgroundColor: themeParams.sectionBgColor}} className='progressLine' value={progress}/>

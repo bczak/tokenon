@@ -9,12 +9,13 @@ interface CoinCardCompProps {
 	img: string;
 	cap: bigint;
 	description: string;
-	token: string;
+	token: string,
+	curve: string;
 }
 
-export const CoinCardComp: FC<CoinCardCompProps> = ({address, img, cap, description, token}) => {
+export const CoinCardComp: FC<CoinCardCompProps> = ({curve, img, cap, description, token}) => {
 	return (
-		<Link to={`/coin/${address}`}>
+		<Link to={`/coin/${curve}`}>
 			<Cell
 				className="coinCard"
 				before={<Image src={`${img}`}/>}

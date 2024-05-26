@@ -11,4 +11,5 @@ export interface TokenInfo {
   description: string,
   image: string,
   balance: bigint,
+  curve: string,
 }

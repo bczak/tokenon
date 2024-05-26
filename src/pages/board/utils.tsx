@@ -34,7 +34,8 @@ export const fetchTokens = async (): Promise<TokenInfo[]> => {
 				description: data.metadata.description,
 				name: data.metadata.name,
 				symbol: data.metadata.symbol,
-				balance: 0n
+				balance: 0n,
+				curve: curve
 			} as TokenInfo;
 			
 		} catch (e) {
