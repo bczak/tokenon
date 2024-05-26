@@ -21,9 +21,9 @@ export const LaunchPage: FC = () => {
   const [ description, setDescription ] = useState<string>('')
   const [ image, setImage ] = useState<string>('')
 
-  const isLaunchButtonDisabled = useMemo(() => {
-    return (name.isEmpty() || symbol.isEmpty() || description.isEmpty() || image.isEmpty() || supply.isZero())
-  }, [ name, symbol, description, image, supply ])
+  // const isLaunchButtonDisabled = useMemo(() => {
+  //   return (name.isEmpty() || symbol.isEmpty() || description.isEmpty() || image.isEmpty())
+  // }, [ name, symbol, description, image, supply ])
 
   useEffect(() => {
     if (!wallet) {
@@ -138,7 +138,7 @@ export const LaunchPage: FC = () => {
         size={ 'l' }
         style={ { width: '100%' } }
         onClick={ handleDeploy }
-        disabled={ isLaunchButtonDisabled }
+        // disabled={ isLaunchButtonDisabled }
       >
         Create and mint
       </Button>

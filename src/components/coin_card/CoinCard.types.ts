@@ -6,4 +6,6 @@ export interface ICoinCardProps {
   img: string,
   tokenName: string,
   tokenTicker?: string,
+  supply: bigint
+  balance: bigint
 }

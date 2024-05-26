@@ -41,6 +41,8 @@ export const BoardPage: React.FC = () => {
 			<div className="board-coins">
 				{ data.map((token) => (
 					<CoinCard
+            supply={token.supply}
+            balance={token.tonBalance}
 						key={ token.address }
 						curve={ token.curve }
 						address={ token.address }
