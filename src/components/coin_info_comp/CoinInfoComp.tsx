@@ -1,70 +1,62 @@
-import { Caption, Image, Progress, Text } from '@telegram-apps/telegram-ui';
-import { type FC } from 'react';
+import {Caption, Image, Progress, Text} from '@telegram-apps/telegram-ui';
+import {type FC} from 'react';
 import './CoinInfoComp.scss';
-import { useThemeParams } from '@tma.js/sdk-react';
-import { useParams } from 'react-router-dom';
-import { TokenInfo } from '@/pages/board/BoardPage.types';
+import {useThemeParams} from '@tma.js/sdk-react';
+import {useParams} from 'react-router-dom';
+import {TokenInfo} from '@/pages/board/BoardPage.types';
 import {useQuery} from "@tanstack/react-query";
-import { fetchTokenByAddress } from './utils';
+import {fetchTokenByAddress} from './utils';
 
-interface CoinInfoCompProps {
-    id: number;
-    img: string;
-    cap: string;
-    description: string;
-    token: string;
-}
-
-export const CoinInfoComp: FC<CoinInfoCompProps>  = ({id}) => {
-    const themeParams = useThemeParams()
-    const progress = 35;
-    const { address } = useParams<{ address: string }>();
-
-    const { data }  = useQuery<TokenInfo | null>({
-        queryKey: ['token', address],
-        queryFn: () => fetchTokenByAddress(address!),
-      })
-
-    return (
-        <>
-        {data && (
-        <div className='coinInfoContainer'>
-            <Image className='coinImage' src={data.image} />
-            <div className='infoContainer'>
-                <Text className='tokenText' style={{ color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">{`${data.name} (ticker: ${data.symbol})`}</Text>
-            <div className='marketCap'>
-                <Caption className='capText'>Market cap: </Caption>
-                <Caption className='capValue'>{Number(data?.balance / 10n ** 9n).toLocaleString()}</Caption>
-            </div>
-            <Text style={{ color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} className='description'>{data.description}</Text>
-            </div>
-        </div>
-        )}
-        <div className='progressContainer'>
-            <Text style={{ color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">Progress</Text>
-            <Progress style={{ backgroundColor: themeParams.sectionBgColor}} className='progressLine'  value={progress} />
-            <Caption className='progressValue'>{progress}%</Caption>
-        </div>
-        <div className='progressContainer'>
-        <Text style={{ color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">Holder distribution</Text>
-            <div style={{ backgroundColor: themeParams.sectionBgColor}} className='list'>
-                {/* {holders.map((holder, idx) => { */}
-            <div className='listItem'>
-                <Caption>{id}. Name 1</Caption>
-                <Caption>40%</Caption>
-            </div>
-            <div className='listItem'>
-                <Caption>2. Name 2</Caption>
-                <Caption>20%</Caption>
-            </div>
-            <div className='listItem'>
-                <Caption>3. Name 3</Caption>
-                <Caption>10%</Caption>
-            </div>
-            {/* } */}
-            </div>
-        </div>
-        </>
-    )
+export const CoinInfoComp: FC = () => {
+	const themeParams = useThemeParams()
+	const progress = 35;
+	const {address} = useParams<{ address: string }>();
+	
+	const {data} = useQuery<TokenInfo | null>({
+		queryKey: ['token', address],
+		queryFn: () => fetchTokenByAddress(address!),
+	})
+	
+	return (
+		<>
+			{data && (
+				<div className='coinInfoContainer'>
+					<Image className='coinImage' src={data.image}/>
+					<div className='infoContainer'>
+						<Text className='tokenText' style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">{`${data.name} (ticker: ${data.symbol})`}</Text>
+						<div className='marketCap'>
+							<Caption className='capText'>Market cap: </Caption>
+							<Caption className='capValue'>{Number(data?.balance / 10n ** 9n).toLocaleString()}</Caption>
+						</div>
+						<Text style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} className='description'>{data.description}</Text>
+					</div>
+				</div>
+			)}
+			<div className='progressContainer'>
+				<Text style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">Progress</Text>
+				<Progress style={{backgroundColor: themeParams.sectionBgColor}} className='progressLine' value={progress}/>
+				<Caption className='progressValue'>{progress}%</Caption>
+			</div>
+			<div className='progressContainer'>
+				<Text style={{color: themeParams.isDark ? 'lightgray' : themeParams.textColor}} weight="1">Holder distribution</Text>
+				<div style={{backgroundColor: themeParams.sectionBgColor}} className='list'>
+					{/* {holders.map((holder, idx) => { */}
+					<div className='listItem'>
+						<Caption>1. Name 1</Caption>
+						<Caption>40%</Caption>
+					</div>
+					<div className='listItem'>
+						<Caption>2. Name 2</Caption>
+						<Caption>20%</Caption>
+					</div>
+					<div className='listItem'>
+						<Caption>3. Name 3</Caption>
+						<Caption>10%</Caption>
+					</div>
+					{/* } */}
+				</div>
+			</div>
+		</>
+	)
 };
 
