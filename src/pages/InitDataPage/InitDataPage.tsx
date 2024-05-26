@@ -47,7 +47,8 @@ export const InitDataPage: FC = () => {
 		console.log(myTransaction);
 		const result = await tonConnectUI.sendTransaction(myTransaction);
 		console.log(result.boc)
-		
+		alert('Bonding curve deployed!');
+		navigate('/', {replace: true});
 	}
 	
 	const handleSupplyChange = (e: any) => {

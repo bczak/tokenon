@@ -17,14 +17,12 @@ export const fetchTokens = async (): Promise<TokenInfo[]> => {
 			}
 		}
 	}
-	console.log(curves)
-	const tokens: TokenInfo[] = await Promise.all([...curves].map(async (curve) => {
+	return await Promise.all([...curves].map(async (curve) => {
 		const result = await client.blockchain.execGetMethodForBlockchainAccount(curve, 'token');
 		const hex = result.stack[0].cell;
 		const cells = Cell.fromBoc(Buffer.from(hex!, 'hex'));
 		const token = cells[0].beginParse().loadAddressAny()?.toString()
 		const data = await client.jettons.getJettonInfo(token!);
-		console.log(data)
 		return {
 			address: token!,
 			image: data.metadata.image,
@@ -34,6 +32,4 @@ export const fetchTokens = async (): Promise<TokenInfo[]> => {
 			balance: 0n
 		} as TokenInfo;
 	}))
-	console.log(tokens)
-	return tokens
 }
