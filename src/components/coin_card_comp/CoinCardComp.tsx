@@ -5,16 +5,16 @@ import './CoinCardComp.scss';
 
 interface CoinCardCompProps {
 	id: number;
+	address: string;
 	img: string;
 	cap: bigint;
 	description: string;
 	token: string;
 }
 
-export const CoinCardComp: FC<CoinCardCompProps> = ({ img, cap, description, token}) => {
+export const CoinCardComp: FC<CoinCardCompProps> = ({ id, address, img, cap, description, token}) => {
 	return (
-		<Link to={'/coin'}>
-			{/* <Link to={`/coin${id}`}> */}
+	 <Link to={`/coin/${address}`}>
 			<Cell
 				className="coinCard"
 				before={<Image src={`${img}`}/>}

@@ -44,6 +44,7 @@ export const BoardPage: React.FC = () => {
 			</SegmentedControl>
 			<Section>
 				{data.map((token, i) => <CoinCardComp id={i} key={i}
+				address={token.address}
 				                                      cap={token.balance} description={token.description}
 				                                      token={`${token.name} (ticker: ${token.symbol})`} img={token.image}/>)
 				}

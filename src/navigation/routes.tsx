@@ -17,7 +17,7 @@ export const routes: Route[] = [
   { path: '/', Component: BoardPage },
   { path: '/launch', Component: InitDataPage, title: 'Launch new token' },
   { path: '/theme-params', Component: ThemeParamsPage, title: 'Theme Params' },
-  { path: '/coin', Component: CoinPage, title: 'Coin Card' },
+  { path:  '/coin/:address', Component: CoinPage, title: 'Coin Card' },
   {
     path: '/wallet',
     Component: WalletPage,

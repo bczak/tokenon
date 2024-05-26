@@ -2,6 +2,7 @@ import { Caption, Image, Progress, Text } from '@telegram-apps/telegram-ui';
 import { type FC } from 'react';
 import './CoinInfoComp.scss';
 import { useThemeParams } from '@tma.js/sdk-react';
+import { useParams } from 'react-router-dom';
 
 interface CoinInfoCompProps {
     id: number;
@@ -14,6 +15,7 @@ interface CoinInfoCompProps {
 export const CoinInfoComp: FC<CoinInfoCompProps>  = ({id, img, cap, description, token}) => {
     const themeParams = useThemeParams()
     const progress = 35;
+    const { address } = useParams<{ address: string }>();
 
     return (
         <>
