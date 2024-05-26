@@ -7,7 +7,7 @@ import jettonDefaultImage from "@/assets/images/jetton_default_image.webp";
 
 export const CoinInfoComp: FC<ITokenInfo> = (data) => {
 	const themeParams = useThemeParams()
-	const progress = 35;
+	const progress = Math.round((Number(data.supply - data.balance) / Number(data.supply)) * 100);
 	
 	const [coinImage, setCoinImage] = useState(data.image)
 	
