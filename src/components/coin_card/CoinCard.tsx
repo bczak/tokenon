@@ -1,5 +1,5 @@
 import React, {useCallback, useState} from 'react'
-import {Image, Text, Subheadline, Cell} from '@telegram-apps/telegram-ui'
+import {Image, Text, Subheadline, Cell, Progress} from '@telegram-apps/telegram-ui'
 import {useThemeParams} from '@tma.js/sdk-react'
 
 import {Link} from '../Link/Link.tsx'
@@ -19,6 +19,8 @@ export const CoinCard: React.FC<ICoinCardProps> = (props) => {
 	const onImageError = useCallback(() => {
 		setCoinImage(jettonDefaultImage)
 	}, [setCoinImage])
+
+	const progress =  Math.floor(Math.random() * 101);
 	
 	return (
 		<Link to={`/coin/${curve}`}>
@@ -66,6 +68,7 @@ export const CoinCard: React.FC<ICoinCardProps> = (props) => {
 					{tokenName} (ticker: <span style={{color: themeParams.destructiveTextColor}}>{tokenTicker}</span>)
 				</Subheadline>
 			</Cell>
+			<Progress className='progressLine' value={progress}/>
 		</Link>
 	)
 }

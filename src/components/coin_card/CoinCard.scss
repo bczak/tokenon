@@ -1,4 +1,5 @@
 .coin-card {
+  border-radius: 10px;
   background-color: #{var(--tg-theme-section-bg-color)};
 
   &__ticker {
@@ -9,4 +10,9 @@
   &__cap-value {
     color: #{var(--tg-theme-button-color)};
   }
+}
+
+.progressLine {
+  margin-bottom: 0.5rem;
+  background-color: #{var(--tg-theme-secondary-bg-color)};
 }
